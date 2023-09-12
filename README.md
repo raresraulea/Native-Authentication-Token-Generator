@@ -11,7 +11,7 @@ Open the `src/config.ts` file and provide the necessary configuration details:
 
 - Set your origin
 - Enter your wallet address
-- Define the expected Time To Live (TTL) for the Native Auth Access tokens (defaults to 7 days).
+- Define the expected Time To Live (TTL) for the Native Auth Access tokens (defaults to 24h).
 
 ```
 export const origin = 'https://localhost:3000';
