@@ -1,19 +1,31 @@
-```markdown
+
 # Native Authentication Access Token Generator
 
 This TypeScript tool simplifies the process of generating Native Authentication access tokens. Follow the steps below to configure and use this tool effectively.
 
-## Configuration
+Follow these steps:
 
-1. Open the `src/config.ts` file and provide the necessary configuration details:
-   - Set your origin
-   - Enter your wallet address
-   - Define the expected Time To Live (TTL) for the Native Auth Access tokens (defaults to 7 days).
+## 1. Configuration
 
-## Message Generation
+Open the `src/config.ts` file and provide the necessary configuration details:
 
-2. Generate a message by running the following command:
-   
+- Set your origin
+- Enter your wallet address
+- Define the expected Time To Live (TTL) for the Native Auth Access tokens (defaults to 7 days).
+
+```
+export const origin = 'https://localhost:3000';
+export const address = "erd1...";
+export const client = new NativeAuthClient({
+    origin,
+    expirySeconds: 7 * 24 * 60 * 60,
+});
+```
+
+## 2. Generate Signable Message
+
+Generate a message by running the following command:
+
    ```shell
    npx ts-node src/generateUnsignedMessage.ts
    ```
@@ -25,12 +37,19 @@ This TypeScript tool simplifies the process of generating Native Authentication 
    erd19rh30cq9964an8vj7qnj7gwaus90nv6020vxpu69ramwrn8yr78smteyclaHR0cDovL2xvY2FsaG9zdDozMDAw.b1f6c7b8278c5c15d1e090da4b463450bdbf302f9734ed407f29a961903110fe.604800.e30
    ```
 
-## Signature and Access Token
+## 3. Sign the message
 
-3. Sign the provided message using utils.multiversx.com's signing tool.
-4. Enter the generated signature in the `src/generateAccessToken.ts` file.
+Sign the provided message using `utils.multiversx.com`'s signing tool and copy the resulting signed message. You can alternatively use other signing providers of the MultiversX's ecosystem.
 
-5. Finally, run the following command to obtain your access token:
+## 4. Generate Access Token
+
+i. Enter the signed message in the `src/generateAccessToken.ts` file.
+
+```
+const signedMessageFromUtilsMvx = "SIGNED_MESSAGE_GOES_HERE";
+```
+
+ii. Finally, run the following command to obtain your access token:
 
    ```shell
    npx ts-node src/generateAccessToken.ts
